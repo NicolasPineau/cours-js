@@ -1,0 +1,102 @@
+.flex {
+    display: flex;
+
+    &-inline {
+        display: inline-flex;
+    }
+
+    &--end {
+        align-self: flex-end;
+    }
+
+    &--start {
+        align-self: flex-start;
+    }
+
+    &--center {
+        align-self: center;
+    }
+
+    &--stretch {
+        align-self: stretch;
+    }
+
+    &--items-center {
+        align-items: center;
+    }
+
+    &--items-end {
+        align-items: flex-end;
+    }
+
+    &--wrap {
+        flex-wrap: wrap;
+    }
+
+    &--col {
+        flex-direction: column;
+    }
+
+    &--space-between {
+        justify-content: space-between;
+    }
+
+    &--space-around {
+        justify-content: space-around;
+    }
+
+    &--content-end {
+        justify-content: flex-end;
+    }
+
+    &--baseline {
+        align-items: baseline;
+    }
+
+    &--center-all {
+        align-items: center;
+        justify-content: center;
+    }
+
+    &--grow {
+        flex: 1;
+    }
+
+    &--full {
+        flex-basis: 100%;
+    }
+
+    &--at-start {
+        margin-right: auto;
+    }
+
+    &--at-end {
+        margin-left: auto;
+    }
+
+    &--with-gutter {
+        &-left {
+            & > *:not(:first-child) {
+                margin-left: 10px;
+            }
+        }
+
+        &-right {
+            & > *:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+
+        &-top {
+            & > *:not(:first-child) {
+                margin-top: 10px;
+            }
+        }
+
+        &-bottom {
+            & > *:not(:last-child) {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

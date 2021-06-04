@@ -1,0 +1,32 @@
+// Colors
+$apple: #4FA83D;
+$apple-blossom: #AF4D43;
+$bahama-blue: #026395;
+$cornflower-blue: #6195ED;
+$feta: #F0FCEA;
+$outer-space: #2D383A;
+
+$color-primary: $cornflower-blue;
+$color-secondary: $outer-space;
+$color-light: #FFF;
+$color-dark: $outer-space;
+$color-border: $color-primary;
+$color-background: $bahama-blue;
+$color-background-light: $color-light;
+$color-ok: $apple;
+$color-ko: $apple-blossom;
+$color-background-success: $feta;
+
+// Media Queries
+$breakpoints: (
+    xs: 414px,
+    sm: 768px,
+    md: 992px,
+    lg: 1200px,
+    extra-lg: 1400px,
+);
+
+// Default styles
+$limited-container-width: 1440px;
+$default-spacing: 20px;
+$default-radius: 10px;

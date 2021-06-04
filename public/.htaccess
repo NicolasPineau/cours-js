@@ -1,0 +1,16 @@
+<If "req('Host') != 'www.cours-js.test'">
+    AuthName "Accès restreint"
+    AuthType Basic
+    AuthUserFile "/DATA/j/s/_/js_licence/www/.htpasswd"
+    Require valid-user
+</If>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteRule . /index.html [L]
+</IfModule>

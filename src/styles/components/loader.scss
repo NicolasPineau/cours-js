@@ -1,0 +1,21 @@
+.loader {
+    height: 30px;
+    width: 30px;
+    color: $color-background;
+    position: relative;
+    display: inline-block;
+    border: 3px solid;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: rotate 1s linear infinite;
+    margin: 10px;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

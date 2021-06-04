@@ -1,58 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import {Route, Switch} from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
-}
+import { ScrollToTop } from './components/routing/ScrollToTop';
+import { RouteWrapper } from './components/routing/RouteWrapper';
+import { User } from './components/user/User';
+import { routes } from './resources/routing/routes';
+import { Home } from './components/home/Home';
+import { Team } from './components/lesson/Team';
+import { Quiz } from './components/quiz/Quiz';
+import { End } from './components/end/End';
+import { Lesson } from './components/lesson/Lesson';
 
-export default App;
+export const App = () => (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Switch>
+        <RouteWrapper exact path={routes.home} component={Home} />
+        <Route exact path={routes.team} component={Team} />
+        <Route exact path={routes.quiz} component={Quiz} />
+        <RouteWrapper exact path={routes.user} component={User} />
+        <RouteWrapper exact path={routes.end} component={End} />
+        <RouteWrapper exact path={[routes.module, routes.modulePage]} component={Lesson} />
+      </Switch>
+    </BrowserRouter>
+);

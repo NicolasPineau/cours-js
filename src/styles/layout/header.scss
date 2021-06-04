@@ -1,0 +1,17 @@
+.header {
+    margin-bottom: $default-spacing;
+
+    .logo {
+        width: 120px;
+    }
+
+    h1 {
+        color: $color-primary;
+        margin: 0 auto 0 $default-spacing;
+    }
+
+    .now {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+}

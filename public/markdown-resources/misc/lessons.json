@@ -1,0 +1,47 @@
+{
+  "module1": {
+    "title": "Préambule",
+    "pages": {
+      "introduction": "Introduction",
+      "histoire": "Histoire",
+      "jquery-a-vanilla-js": "De jQuery à Vanilla JS"
+    }
+  },
+  "module2": {
+    "title": "Revue de quelques nouveautés ES6",
+    "pages": {
+      "es6-const-let": "Les mots-clés `const` et `let`",
+      "es6-template-literals": "Les littéraux de gabarits",
+      "es6-arrow-functions": "Les fonctions fléchées",
+      "es6-rest-operator": "L'opérateur de reste",
+      "es6-spread-operator": "L'opérateur de décomposition",
+      "es6-destructuring-assignment": "L'affectation par décomposition",
+      "es6-import-export": "Import & export",
+      "es6-others": "Autres nouveautés"
+    }
+  },
+  "exercices": {
+    "title": "Exercices d'entraînement",
+    "pages": {
+      "exercice1": "Stockage local, corriger le code",
+      "exercice2": "Calculatrice basique, réécrire le code",
+      "exercice3": "Formatage d'une adresse, compléter le code",
+      "projet": "Mini projet"
+    }
+  },
+  "module3": {
+    "title": "Tableaux et classes",
+    "pages": {
+      "array-prototype": "Prototype de tableau",
+      "es6-array-prototype": "Prototype de tableau ES6",
+      "es6-classes": "Les classes ES6"
+    }
+  },
+  "module4": {
+    "title": "Fetch et les promesses",
+    "pages": {
+        "promise": "Les promesses",
+        "fetch": "La fonction fetch"
+    }
+  }
+}

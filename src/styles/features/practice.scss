@@ -1,0 +1,24 @@
+.practice {
+    .btn.toggle-editor {
+        width: 200px;
+    }
+
+    &--ok > .hljs {
+        border: 10px solid $color-ok;
+    }
+
+    &--ko > .hljs {
+        border: 10px solid $color-ko;
+    }
+
+    &--ready > .hljs {
+        border: 10px solid $color-primary;
+    }
+
+    .actions {
+        > .btn {
+            padding: 2px 6px;
+            margin: $default-spacing / 2;
+        }
+    }
+}

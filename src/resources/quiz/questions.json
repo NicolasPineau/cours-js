@@ -1,0 +1,195 @@
+[
+  {
+    "id": 1,
+    "question": "Indiquez lequel de ces codes est correct.",
+    "choices": [
+      "for (const i=0; i<scores.length; i++) { \n    console.log(scores[i]);\n}",
+      "let scores = [75, 80, 95];\nfor (const score of scores) {\n    console.log(score);\n}"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Quelle expression utiliseriez-vous pour afficher le nom de l'utilisateur en gras ?",
+    "choices": [
+      "myDiv.innerHTML = ${user.firstName} <b>${user.lastName}</b>;",
+      "myDiv.innerHTML = user.firstName + '<b>' + user.lastName + '</b>';",
+      "myDiv.innerHTML = `${user.firstName} <b>${user.lastName}</b>`;"
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Quelle syntaxe est incorrecte ?",
+    "choices": [
+      "const onLocalChange = ({ target: { name, value } }) => \n    onChange(name, value)\n",
+      "const onLocalChange ({ target: { name, value } }) => onChange(name, value);",
+      "const onLocalChange = function({ target: { name, value } }) {\n    onChange(name, value);\n}"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Laquelle de ces instructions permettra de récupérer la remise dans une variable appelée discount ?",
+    "code": "const data = { orders: [{ id: 10, price: 120, discount: 15 }] };",
+    "choices": [
+      "const [{ discount }] = data;",
+      "const {[ discount ]} = data;",
+      "const { orders: [{ discount }] } = data;"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Laquelle de ces instructions permettra de récupérer les couleurs des yeux des enfants de moins de 12 ans ?",
+    "code": "const kids = [\n  { age: 8, eyeColor: 'blue'},\n  { age: 11, eyeColor: 'green'},\n  { age: 14, eyeColor: 'gray'},\n]",
+    "choices": [
+      "const colors = new Set([...kids.map(({ eyeColor }) => eyeColor)];",
+      "const colors = kids.reduce((acc, { eyeColor }) => ([eyeColor]), [])",
+      "const colors = Object.values(kids).map({ eyeColor }).join();"
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Laquelle de ces instructions n'est pas un export nommé ?",
+    "choices": [
+      "export const value = 10;",
+      "const myFunc = num => num * num;\n\nexport { myFunc };",
+      "export { data as usefulData };",
+      "export default class {\n  /** ... */\n}"
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Qu'affiche ce code dans la console ?",
+    "code": "console.log(\"hello\".includes(\"ell\", 1));",
+    "choices": [
+      "true",
+      "false",
+      "rien"
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Parmi ces instructions, indiquez celle qui va créer un objet dont les clés seront les id du tableau suivant",
+    "code": "const data = [\n  { id: 10, type: 'oak' },\n  { id: 22, type: 'poplar' },\n  { id: 35, type: 'chestnut' },\n]",
+    "choices": [
+      "data.reduce((acc, { id, ...rest }) => ({ ...acc, id: rest }), {})",
+      "data.reduce((acc, { id, ...rest }) => ({ ...acc, [id]: rest }), {})",
+      "data.reduce((acc, { id, ...rest }) => ( ...acc, { [id]: rest } ), {})"
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Indiquez le moyen le plus approprié pour créer un objet avec ces coordonnées.",
+    "code": "const x = 5, y = 10;",
+    "choices": [
+      "const coordinates = { x: x, y: y };",
+      "const coordinates = { x, y };",
+      "const coordinates = [ x, y ];"
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Laquelle de ces syntaxes n'est pas valide ?",
+    "choices": [
+      "const storage = {\n  read (key) {\n    /** ... **/\n  },\n  write (key, data) {\n     /** ... **/\n  }\n};",
+      "const storage = {\n  read: function (key) {\n    /** ... **/\n  },\n  write: function  (key, data) {\n     /** ... **/\n  }\n};",
+      "const storage = {\n  read: (key) => {\n    /** ... **/\n    },\n  write: (key, data) => {\n     /** ... **/\n  }\n};",
+      "aucune"
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Quelle sera le contenu de newFruits ?",
+    "code": "const fruits = ['apple', 'banana', 'orange'];\nconst newFruits = fruits.forEach(fruit => fruit.toUpperCase());",
+    "choices": [
+      "['APPLE', 'BANANA', 'ORANGE']",
+      "[undefined, undefined, undefined]",
+      "undefined"
+    ]
+  },
+  {
+    "id": 12,
+    "question": "Quel code devrait-on utiliser pour vérifier si au moins une commande dépasse 500€ ?",
+    "choices": [
+      "orders.filter(({ amount }) => amount > 500)",
+      "orders.some(({ amount }) => amount > 500)",
+      "orders.every(({ amount }) => amount > 500)",
+      "orders.find(({ amount }) => amount > 500)"
+    ]
+  },
+  {
+    "id": 13,
+    "question": "Par quoi remplacer les XXXXX pour obtenir un résultat cohérent ?",
+    "code": "const games = ['dices', 'cards', 'marbles'];\nalert(`Les billes sont à la position ${games.XXXXXX(game => game === 'marbles')}`);",
+    "choices": [
+      "find",
+      "findIndex",
+      "match"
+    ]
+  },
+  {
+    "id": 14,
+    "question": "Que manque-il dans le constructeur de Rectangle pour appeler le constructeur parent ?",
+    "code": "class Shape {\n  constructor (id, x, y) {\n    this.id = id\n    this.move(x, y)\n  }\n  move (x, y) {\n    this.x = x\n    this.y = y\n  }\n}\n\nclass Rectangle extends Shape {\n  constructor (id, x, y, width, height) {\n    /** ??? ***/\n    this.width  = width\n    this.height = height\n  }\n}",
+    "choices": [
+      "super(id, x, y)",
+      "parent::constructor(id, x, y)",
+      "super(this)"
+    ]
+  },
+  {
+    "id": 15,
+    "question": "A la lecture de ce code, que peut-on déduire de l'endpoint '/api/documents' ?",
+    "code": "return fetch('/api/documents', {\n    headers: new Headers(headers),\n    credentials: 'same-origin',\n    method: 'POST',\n    body: formData,\n  }).then(\n    response => (response.ok ? response.json() : Promise.reject()),\n  ).catch(\n    error => console.error(error)\n  );",
+    "choices": [
+      "Son content-type est text/plain",
+      "Son content-type est text/html",
+      "Son content-type est application/json"
+    ]
+  },
+  {
+    "id": 16,
+    "question": "Par quoi remplaceriez-vous XXXX ?",
+    "code": "function fetch_data() {\n  return fetch('current-data.json').then(response => {\n    if (response.headers.get('content-type') !== 'application/json') {\n      throw new TypeError();\n    }\n    \n    return response.XXX();\n  });\n}",
+    "choices": [
+      "json",
+      "text",
+      "data"
+    ]
+  },
+  {
+    "id": 17,
+    "question": "Que va afficher ce code, et au bout de combien de temps ?",
+    "code": "new Promise(resolve => {\n  setTimeout(() => resolve('A'), 1000);\n}).then(res => new Promise(resolve => {\n  setTimeout(() => resolve(res + 'B'), 2000);\n})).then(res => new Promise(resolve => {\n  setTimeout(() => resolve(res + 'C'), 3000);\n})).then(res => {\n  alert(res);\n});",
+    "choices": [
+      "undefined au bout de 1 seconde",
+      "ABC au bout de 6 secondes",
+      "A au bout de 6 secondes"
+    ]
+  },
+  {
+    "id": 18,
+    "question": "A quoi sert le second paramètre de Promise.then ?",
+    "choices": [
+      "C'est un callback exécuté dans tous les cas lorsque la promesse est résolue",
+      "C'est un callback exécuté lorsque la promesse est en échec",
+      "C'est un argument obsolète"
+    ]
+  },
+  {
+    "id": 19,
+    "question": "Promise.all est utile pour rassembler plusieurs promesses en une seule.\nCette promesse sera...",
+    "choices": [
+      "...résolue lorsque toutes les promesses fournies seront résolues ou qui échouera lorsque l'une d'entre-elles échouera",
+      "...résolue lorsque toutes les promesses fournies seront résolues ou qui échouera lorsqu'elles auront toutes échoué",
+      "...résolue lorsqu'au moins une promesse sera résolue ou échouée"
+    ]
+  },
+  {
+    "id": 20,
+    "question": "Qu'avez-vous pensé du cours ?",
+    "choices": [
+      "Tout pourri :(",
+      "Bof bof :/",
+      "Excellent j'en veux encore :D"
+    ]
+  }
+]

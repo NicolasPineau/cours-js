@@ -1,0 +1,40 @@
+.quiz {
+    margin: $default-spacing;
+
+    > h2 {
+        margin-bottom: $default-spacing * 2;
+    }
+
+    .selector {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0 $default-spacing $default-spacing;
+
+        li {
+            list-style-type: none;
+        }
+    }
+
+    .question {
+        width: 60vw;
+        margin: 0 auto;
+        min-width: 600px;
+
+        > *:not(:first-child) {
+            margin-top: $default-spacing;
+        }
+
+        input[type="radio"] {
+            transform: scale(1.8);
+        }
+
+        .form-check + div {
+            flex-grow: 1;
+        }
+
+        .code {
+            margin-left: 30px;
+        }
+    }
+}

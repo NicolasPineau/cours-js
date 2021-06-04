@@ -1,0 +1,71 @@
+$btn-border-radius: .25rem !important;
+
+$primary: $color-primary;
+$secondary: $color-secondary;
+$light: $color-light;
+$dark: $color-dark;
+
+@import "~bootstrap/scss/bootstrap";
+
+.nav {
+    > .nav-item {
+        &:not(:first-child) {
+            position: relative;
+
+            &:before {
+                content: "-";
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                color: $color-border;
+            }
+        }
+    }
+}
+
+.btn-group > .btn + .btn {
+    margin-left: $default-spacing;
+}
+
+.card + .btn-group {
+    margin-top: $default-spacing;
+}
+
+.list-group + p, li + p, li + .btn {
+    margin-top: $paragraph-margin-bottom;
+}
+
+.breadcrumb {
+    background: none;
+    margin-bottom: 0;
+}
+
+.accordion {
+    border-radius: $default-radius;
+    overflow: hidden;
+
+    > .card > .card-header {
+        cursor: pointer;
+    }
+}
+
+.collapse > .card-body, .collapsing > .card-body {
+    padding: 0;
+}
+
+code .module {
+    background: none;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+}
+
+pre.code-editor__qxcy {
+    margin: 1em 0;
+    font-size: 1em;
+}
+
+.card > .navbar {
+    padding: 8px;
+}

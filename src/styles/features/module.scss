@@ -1,0 +1,29 @@
+.module {
+    background: transparentize($color-light, .3);
+    border: 1px solid $color-light;
+    padding: $default-spacing;
+    border-radius: $default-radius;
+
+    h2 {
+        position: relative;
+        margin-bottom: $default-spacing * 2;
+
+        &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -$default-spacing / 2;
+            width: 400px;
+            height: 2px;
+            background: linear-gradient(to right, $color-border 80%, transparent 100%);
+        }
+    }
+
+    .list-group {
+        flex-wrap: wrap;
+
+        img {
+            max-width: 120px;
+        }
+    }
+}

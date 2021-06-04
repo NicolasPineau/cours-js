@@ -1,0 +1,35 @@
+$left-pane-width: 250px;
+
+.page-layout {
+    max-width: 1200px;
+    min-height: 100vh;
+    padding: $default-spacing;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    > section.header-wrapper {
+        margin-left: $left-pane-width + $default-spacing;
+    }
+
+    > section.body-wrapper {
+        flex-grow: 1;
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+
+        > .sidebar {
+            flex: 0 0 $left-pane-width;
+
+            > img {
+                width: 110%;
+            }
+        }
+
+        > .contents {
+            margin-left: $default-spacing;
+            flex-grow: 1;
+        }
+    }
+}
