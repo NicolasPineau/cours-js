@@ -18,13 +18,23 @@ class Db {
     return new self();
   }
 
-  public function query(string $sql, array $args): PDOStatement|false {
+  public function execute(string $sql, array $args) {
+    return $this->connection->prepare($sql)->execute($args);
+  }
+
+  public function fetchAll(string $sql, array $args) {
     $statement = $this->connection->prepare($sql);
-    foreach ($args as $key => $value) {
-      $statement->bindParam($key, $value);
-    }
+    $statement->execute($args);
     $statement->setFetchMode(PDO::FETCH_ASSOC);
 
-    return $statement;
+    return $statement->fetchAll();
+  }
+
+  public function fetch(string $sql, array $args) {
+    $statement = $this->connection->prepare($sql);
+    $statement->execute($args);
+    $statement->setFetchMode(PDO::FETCH_ASSOC);
+
+    return $statement->fetch();
   }
 }

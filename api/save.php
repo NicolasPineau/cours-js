@@ -7,7 +7,7 @@ $db = Db::getInst();
 $data = json_decode($_POST['json'], true);
 
 $status = '0';
-$db->query(
+$db->execute(
   'REPLACE INTO answers(username, userid, question, answer, state) VALUES (:userName, :userId, :questionId, :answer, :state)',
   [
     'userName' => $data['userName'],
@@ -16,4 +16,4 @@ $db->query(
     'answer' => $data['code'],
     'state' => $status,
   ]
-)->execute();
+);
