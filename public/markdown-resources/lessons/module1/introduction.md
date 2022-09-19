@@ -1,6 +1,6 @@
 ## Introduction
 
-Ce cours a pour but de vous présenter un certains nombres des évolutions récentes du langage **Javascript**, en se concentrant sur ce qui vous sera le plus utile lorsque vous aborderez le React.
+Ce cours a pour but de vous présenter un certains nombres des évolutions récentes du langage **Javascript**, en se concentrant sur ce qui vous sera le plus utile pour (entre autres) le développement avec React.
 
 L'apprentissage d'un langage de programmation demande du temps et de la pratique... ce cours n'est rien de plus qu'une base de départ (peut-être une simple révision pour certains). 
 
