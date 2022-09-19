@@ -4,7 +4,7 @@ include 'Db.php';
 
 $db = Db::getInst();
 
-$query = $db->query(<<<SQL
+$rows = $db->fetchAll(<<<SQL
     SELECT *
     FROM teams
     INNER JOIN teamate
@@ -16,4 +16,4 @@ SQL,
   ['adminUserId' => 'g0j1dxfuca0b11ee']
 );
 
-echo json_encode($query->fetchAll());
+echo json_encode($rows);

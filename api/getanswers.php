@@ -5,12 +5,12 @@ include 'Db.php';
 $db = Db::getInst();
 
 if (isset($_GET['userId'])) {
-  $query = $db->query(
+  $rows = $db->fetchAll(
     'SELECT * FROM quiz_answers WHERE userid = :userId',
     ['userId' => $_GET['userId']]
   );
 
-  echo json_encode($query->fetchAll() ?? []);
+  echo json_encode($rows);
 } else {
   return [];
 }
