@@ -15,10 +15,10 @@ if ($_GET['userId'] === 'g0j1dxfuca0b11ee') {
 }
 
 if (isset($_GET['userId'])) {
-  $rows = $db->fetchAll(
+  $row = $db->fetch(
     'SELECT * FROM answers WHERE question = :questionId AND userid = :userId ORDER BY username',
     ['questionId' => $_GET['exerciseId'], 'userId' => $_GET['userId']]
   );
 
-  echo json_encode($rows);
+  echo json_encode($row);
 }
