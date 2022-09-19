@@ -1,0 +1,34 @@
+{
+  "functions": {
+    "api/data.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "api/genteams.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "api/getanswers.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "api/question.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "api/save.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "api/setanswer.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "api/setquestion.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "api/teams.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "api/user.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "api/validate.php": {
+      "runtime": "vercel-php@0.5.2"
+    }
+  }
+}

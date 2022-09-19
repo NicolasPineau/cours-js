@@ -1,15 +1,12 @@
 <?php
 
+include 'Db.php';
+
 if ($_GET['userId'] !== 'g0j1dxfuca0b11ee') {
   exit;
 }
 
-$db = new mysqli();
-if (mysqli_connect_errno()) {
-  echo '0';
-
-  exit;
-}
+$db = Db::getInst();
 
 $score = function (string $player) {
   return (int) explode('¤', $player)[0];
@@ -19,8 +16,12 @@ $userid = function (string $player) {
   return explode('¤', $player)[1];
 };
 
-$query = $db->query('SELECT userid, level FROM users WHERE userid <> \'g0j1dxfuca0b11ee\'');
-$res = $query->fetch_all(MYSQLI_ASSOC);
+$query = $db->query(
+  'SELECT userid, level FROM users WHERE userid <> :adminId',
+  ['adminId' => 'g0j1dxfuca0b11ee'
+]);
+
+$res = $query->fetchAll();
 $players = [];
 foreach ($res as $row) {
   $players[] = $row['level'] . '¤' . $row['userid'];
@@ -47,7 +48,7 @@ while ([] !== $players) {
   $player2Choice2 = current($choice2);
 
   if (FALSE !== $player2Choice1 || FALSE !== $player2Choice2) {
-    if (FALSE === $choice2 || abs($player1Score - $score($player2Choice1)) < abs($player1Score - $score($player2Choice2))) {
+    if (FALSE === $player2Choice2 || abs($player1Score - $score($player2Choice1)) < abs($player1Score - $score($player2Choice2))) {
       $player2 = $player2Choice1;
       $idsToRemove[] = key($choice1);
     }
@@ -85,24 +86,23 @@ while ([] !== $players) {
 $teamNames = ['ES6 pals', 'Vanilla buddies'];
 $defaultScore = 0;
 
-$query = $db->prepare('INSERT IGNORE INTO teams(name, score) VALUES (?, ?)');
-$query->bind_param('si', $teamNames[0], $defaultScore);
-$query->execute();
+$query = $db->query(
+  'INSERT IGNORE INTO teams(name, score) VALUES (:name, :score)',
+  ['name' => $teamNames[0], 'score' => $defaultScore]
+)->execute();
 
-$query = $db->prepare('INSERT IGNORE INTO teams(name, score) VALUES (?, ?)');
-$query->bind_param('si', $teamNames[1], $defaultScore);
-$query->execute();
+$query = $db->query(
+  'INSERT IGNORE INTO teams(name, score) VALUES (:name, :score)',
+  ['name' => $teamNames[1], 'score' => $defaultScore]
+)->execute();
 
-var_dump($teams);
 foreach ($teams as $key => $team) {
   $teamName = $teamNames[$key];
   foreach ($team as $player) {
     $playerId = $userid($player);
-    $query = $db->prepare('INSERT INTO teamate(teamname, userid) VALUES (?, ?)');
-    $query->bind_param('ss', $teamName, $playerId);
-    $query->execute();
+    $query = $db->query(
+      'INSERT INTO teamate(teamname, userid) VALUES (:teamName, :playerId)',
+      ['teamName' => $teamName, 'playerId' => $playerId]
+    )->execute();
   }
 }
-
-$query->close();
-$db->close();

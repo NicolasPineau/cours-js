@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch} from 'react-router';
+import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 
 import { ScrollToTop } from './components/routing/ScrollToTop';
@@ -13,15 +13,15 @@ import { End } from './components/end/End';
 import { Lesson } from './components/lesson/Lesson';
 
 export const App = () => (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Switch>
-        <RouteWrapper exact path={routes.home} component={Home} />
-        <Route exact path={routes.team} component={Team} />
-        <Route exact path={routes.quiz} component={Quiz} />
-        <RouteWrapper exact path={routes.user} component={User} />
-        <RouteWrapper exact path={routes.end} component={End} />
-        <RouteWrapper exact path={[routes.module, routes.modulePage]} component={Lesson} />
-      </Switch>
-    </BrowserRouter>
+  <BrowserRouter>
+    <ScrollToTop />
+    <Switch>
+      <RouteWrapper exact path={routes.home} component={Home} />
+      <Route exact path={routes.team} component={Team} />
+      <Route exact path={routes.quiz} component={Quiz} />
+      <RouteWrapper exact path={routes.user} component={User} />
+      <RouteWrapper exact path={routes.end} component={End} />
+      <RouteWrapper exact path={[routes.module, routes.modulePage]} component={Lesson} />
+    </Switch>
+  </BrowserRouter>
 );

@@ -20,7 +20,7 @@ export const Team = () => {
   const load = id => {
     const userId = loadStorage('key') || currentUserId;
 
-    fetch(`/data.php?exerciseId=${id}&userId=${userId}`).then(res => res.json()).then(res => {
+    fetch(`/api/data.php?exerciseId=${id}&userId=${userId}`).then(res => res.json()).then(res => {
       if (!res) {
         return;
       }
@@ -42,7 +42,7 @@ export const Team = () => {
       newStatus,
     }));
 
-    fetch('/validate.php', {
+    fetch('/api/validate.php', {
       method: 'POST',
       body: formData,
     }).then(res => { console.log(res); });
