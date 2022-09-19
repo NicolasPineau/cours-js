@@ -8,7 +8,11 @@ $data = json_decode($_POST['json'], true);
 
 $query = $db->query(
   'REPLACE INTO quiz_answers(userid, questionid, answer) VALUES (:userId, :questionId, :answer)',
-  ['userId' => $data['userId'], 'questionId' => $data['questionId'], 'answer' => $data['answer']]
+  [
+    'userId' => $data['userId'],
+    'questionId' => $data['questionId'],
+    'answer' => $data['answer'],
+  ]
 );
 $query->execute();
 

@@ -19,7 +19,10 @@ class Db {
   }
 
   public function query(string $sql, array $args): PDOStatement|false {
-    $statement = $this->connection->prepare($sql, $args);
+    $statement = $this->connection->prepare($sql);
+    foreach ($args as $key => $value) {
+      $statement->bindParam($key, $value);
+    }
     $statement->setFetchMode(PDO::FETCH_ASSOC);
 
     return $statement;
