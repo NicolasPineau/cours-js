@@ -33,11 +33,11 @@ export const Quiz = () => {
   const userId = masterKey || tempUserId;
 
   useInterval(() => {
-    fetch('/question.php').then(res => res.json()).then(activeQuestionId => {
+    fetch('/api/question.php').then(res => res.json()).then(activeQuestionId => {
       setQuestionId(+activeQuestionId);
     });
 
-    fetch(`/teams.php?userId=${userId}`).then(res => res.json()).then(res => {
+    fetch(`/api/teams.php?userId=${userId}`).then(res => res.json()).then(res => {
       if (!res) {
         return;
       }
@@ -55,7 +55,7 @@ export const Quiz = () => {
   }, 1000);
 
   useEffect(() => {
-    fetch(`/getanswers.php?userId=${userId}`).then(res => res.json()).then(res => {
+    fetch(`/api/getanswers.php?userId=${userId}`).then(res => res.json()).then(res => {
       console.log(res);
       if (!res) {
         return;
@@ -66,7 +66,7 @@ export const Quiz = () => {
   }, []);
 
   const changeQuestion = id => {
-    fetch(`/setquestion.php?userId=${userId}&questionId=${id}`);
+    fetch(`/api/setquestion.php?userId=${userId}&questionId=${id}`);
   };
 
   const chooseAnswer = answer => {
@@ -78,14 +78,14 @@ export const Quiz = () => {
       answer,
     }));
 
-    fetch('/setanswer.php', {
+    fetch('/api/setanswer.php', {
       method: 'POST',
       body: formData,
     }).then(res => { console.log(res); });
   };
 
   const generateTeams = () => {
-    fetch(`/genteams.php?userId=${userId}`);
+    fetch(`/api/genteams.php?userId=${userId}`);
   };
 
   const activeQuestion = questionId && questions.find(({ id }) => id === questionId);

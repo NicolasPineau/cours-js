@@ -45,7 +45,7 @@ export const User = () => {
       level,
     }));
 
-    fetch('/user.php', {
+    fetch('/api/user.php', {
       method: 'POST',
       body: formData,
     }).then(res => { console.log(res); });

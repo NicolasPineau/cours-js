@@ -19,7 +19,7 @@ export const Practice = ({ exerciseId, baseCode }) => {
   const debouncedCode = useDebounce(code, 300);
 
   const loadStatus = () => {
-    fetch(`/data.php?exerciseId=${exerciseId}&userId=${userId}`).then(res => res.json()).then(res => {
+    fetch(`/api/data.php?exerciseId=${exerciseId}&userId=${userId}`).then(res => res.json()).then(res => {
       res && setStatus(+res.state);
     });
   };
@@ -41,7 +41,7 @@ export const Practice = ({ exerciseId, baseCode }) => {
       code: debouncedCode
     }));
 
-    fetch('/save.php', {
+    fetch('/api/save.php', {
       method: 'POST',
       body: formData,
     }).then(res => { console.log(res); });
@@ -62,7 +62,7 @@ export const Practice = ({ exerciseId, baseCode }) => {
       newStatus,
     }));
 
-    fetch('/validate.php', {
+    fetch('/api/validate.php', {
       method: 'POST',
       body: formData,
     }).then(res => { console.log(res); });
