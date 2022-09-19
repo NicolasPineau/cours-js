@@ -11,7 +11,7 @@ $db = Db::getInst();
 $questionId = (int) $_GET['questionId'];
 
 $key = 'questionid';
-$db->query(
+$db->execute(
   'REPLACE INTO info(`key`, value) VALUES (:key, :questionId)',
   ['key' => $key, 'questionId' => $questionId]
-)->execute();
+);

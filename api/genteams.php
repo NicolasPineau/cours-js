@@ -16,12 +16,11 @@ $userid = function (string $player) {
   return explode('¤', $player)[1];
 };
 
-$query = $db->query(
+$res = $db->fetchAll(
   'SELECT userid, level FROM users WHERE userid <> :adminId',
   ['adminId' => 'g0j1dxfuca0b11ee'
 ]);
 
-$res = $query->fetchAll();
 $players = [];
 foreach ($res as $row) {
   $players[] = $row['level'] . '¤' . $row['userid'];
@@ -86,23 +85,23 @@ while ([] !== $players) {
 $teamNames = ['ES6 pals', 'Vanilla buddies'];
 $defaultScore = 0;
 
-$query = $db->query(
+$query = $db->execute(
   'INSERT IGNORE INTO teams(name, score) VALUES (:name, :score)',
   ['name' => $teamNames[0], 'score' => $defaultScore]
-)->execute();
+);
 
-$query = $db->query(
+$query = $db->execute(
   'INSERT IGNORE INTO teams(name, score) VALUES (:name, :score)',
   ['name' => $teamNames[1], 'score' => $defaultScore]
-)->execute();
+);
 
 foreach ($teams as $key => $team) {
   $teamName = $teamNames[$key];
   foreach ($team as $player) {
     $playerId = $userid($player);
-    $query = $db->query(
+    $query = $db->execute(
       'INSERT INTO teamate(teamname, userid) VALUES (:teamName, :playerId)',
       ['teamName' => $teamName, 'playerId' => $playerId]
-    )->execute();
+    );
   }
 }
