@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Button, Pagination} from 'react-bootstrap';
+import { Button, Pagination } from 'react-bootstrap';
 import { Person, Check, BugFill, CloudArrowUp } from 'react-bootstrap-icons';
 import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 

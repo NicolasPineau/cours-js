@@ -6,11 +6,14 @@ $db = Db::getInst();
 
 $data = json_decode($_POST['json'], true);
 
-$query = $db->query(
+$db->execute(
   'REPLACE INTO quiz_answers(userid, questionid, answer) VALUES (:userId, :questionId, :answer)',
-  ['userId' => $data['userId'], 'questionId' => $data['questionId'], 'answer' => $data['answer']]
+  [
+    'userId' => $data['userId'],
+    'questionId' => $data['questionId'],
+    'answer' => $data['answer'],
+  ]
 );
-$query->execute();
 
 $goodAnswers = [
   1 => 1,
@@ -35,22 +38,21 @@ $goodAnswers = [
   20 => 2,
 ];
 
-$query = $db->query(
+$row = $db->fetch(
   'SELECT level FROM users WHERE userid = :userId',
   ['userId' => $data['userId']]
 );
-$level = (int) $query->fetch()['level'];
+$level = (int) ($row['level'] ?? 1);
 
-$query = $db->query(
+$row = $db->fetch(
   'SELECT teamname FROM teamate WHERE userid = :userId',
   ['userId' => $data['userId']]
 );
-$teamName = $query->fetch()['teamname'];
+$teamName = $row['teamname'];
 
 $points = $goodAnswers[$data['questionId']] === (int) $data['answer'] ? $level : -$level;
 
-$query = $db->query(
+$db->execute(
   'UPDATE teams SET score = score + :points WHERE name = :teamName',
   ['points' => $points, 'teamName' => $teamName]
 );
-$query->execute();
