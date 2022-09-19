@@ -12,14 +12,14 @@ export const Home = () => {
   };
 
   return (
-      <div className="home">
-        <ListGroup defaultActiveKey="#link1">
-          {Object.entries(lessons).map(([key, { title }]) => (
-              <ListGroup.Item key={key} action href={`/${key}`} onClick={() => onModuleClicked(key)}>
-                {key} - {title}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      </div>
+    <div className="home">
+      <ListGroup defaultActiveKey="#link1">
+        {Object.entries(lessons).map(([key, { title }]) => (
+          <ListGroup.Item key={key} action href={`/${key}`} onClick={() => onModuleClicked(key)}>
+            {key} - {title}
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
+    </div>
   )
 };
