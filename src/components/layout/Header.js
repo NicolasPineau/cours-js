@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Badge } from 'react-bootstrap'
 
-import { ReactComponent as Logo } from '../../resources/pictures/logo.svg';
 import { useInterval } from '../../hook/interval';
 import { getUserInfo } from '../../lib/helper/user';
+import logo from '../../resources/pictures/logo.png';
 
 export const Header = () => {
   const [now, setNow] = useState(new Date());
@@ -20,7 +20,7 @@ export const Header = () => {
       <div className="header">
         <div className="flex flex--items-center">
           <div className="logo">
-            <Logo />
+            <img src={logo} alt="Cours JS logo" />
           </div>
           <h1>
             Le javascript moderne

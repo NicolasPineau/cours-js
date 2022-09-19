@@ -14,11 +14,16 @@ export const Practice = ({ exerciseId, baseCode }) => {
   const userId = loadStorage('userId');
   const [code, setCode] = useState(loadStorage(`exercise${exerciseId}`) || baseCode);
   const [status, setStatus] = useState(0);
+  const [isWriting, setIsWriting] = useState(false);
   const [touched, setTouched] = useState(false);
   const [viewBaseCode, setViewBaseCode] = useState(false);
   const debouncedCode = useDebounce(code, 300);
 
   const loadStatus = () => {
+    if (isWriting) {
+      return;
+    }
+
     fetch(`/api/data.php?exerciseId=${exerciseId}&userId=${userId}`).then(res => res.json()).then(res => {
       res && setStatus(+res.state);
     });
@@ -54,6 +59,7 @@ export const Practice = ({ exerciseId, baseCode }) => {
   };
 
   const onChangeStatus = newStatus => {
+    setIsWriting(true);
     setStatus(newStatus);
     const formData = new FormData();
     formData.append('json', JSON.stringify({
@@ -65,7 +71,9 @@ export const Practice = ({ exerciseId, baseCode }) => {
     fetch('/api/validate.php', {
       method: 'POST',
       body: formData,
-    }).then(res => { console.log(res); });
+    }).then(() => {
+      setIsWriting(false);
+    });
   };
 
   const onToggleBaseCode = () => {
@@ -91,10 +99,10 @@ export const Practice = ({ exerciseId, baseCode }) => {
         inlineNumbers
       />
       {code && code !== baseCode && <div className="actions flex flex--space-between">
-        {status !== 3 && <Button variant="success" onClick={() => onChangeStatus(3)}>
+        {(status !== 1 && status !== 3) && <Button variant="success" onClick={() => onChangeStatus(3)}>
           Valider <CloudArrowUp />
         </Button>}
-        {status === 3 && <Button variant="danger" onClick={() => onChangeStatus(0)}>
+        {(status === 1 || status === 3) && <Button variant="danger" onClick={() => onChangeStatus(0)}>
           Annuler <XOctagonFill />
         </Button>}
       </div>}

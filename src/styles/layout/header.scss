@@ -2,7 +2,9 @@
     margin-bottom: $default-spacing;
 
     .logo {
-        width: 120px;
+        img {
+            width: 120px;
+        }
     }
 
     h1 {
