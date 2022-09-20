@@ -99,10 +99,10 @@ export const Practice = ({ exerciseId, baseCode }) => {
         inlineNumbers
       />
       {code && code !== baseCode && <div className="actions flex flex--space-between">
-        {status !== 3 && <Button variant="success" onClick={() => onChangeStatus(3)}>
+        {(status !== 1 && status !== 3) && <Button variant="success" onClick={() => onChangeStatus(3)}>
           Valider <CloudArrowUp />
         </Button>}
-        {status === 3 && <Button variant="danger" onClick={() => onChangeStatus(0)}>
+        {(status === 1 || status === 3) && <Button variant="danger" onClick={() => onChangeStatus(0)}>
           Annuler <XOctagonFill />
         </Button>}
       </div>}
