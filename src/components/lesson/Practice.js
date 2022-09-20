@@ -14,11 +14,16 @@ export const Practice = ({ exerciseId, baseCode }) => {
   const userId = loadStorage('userId');
   const [code, setCode] = useState(loadStorage(`exercise${exerciseId}`) || baseCode);
   const [status, setStatus] = useState(0);
+  const [isWriting, setIsWriting] = useState(false);
   const [touched, setTouched] = useState(false);
   const [viewBaseCode, setViewBaseCode] = useState(false);
   const debouncedCode = useDebounce(code, 300);
 
   const loadStatus = () => {
+    if (isWriting) {
+      return;
+    }
+
     fetch(`/api/data.php?exerciseId=${exerciseId}&userId=${userId}`).then(res => res.json()).then(res => {
       res && setStatus(+res.state);
     });
@@ -54,6 +59,7 @@ export const Practice = ({ exerciseId, baseCode }) => {
   };
 
   const onChangeStatus = newStatus => {
+    setIsWriting(true);
     setStatus(newStatus);
     const formData = new FormData();
     formData.append('json', JSON.stringify({
@@ -65,7 +71,9 @@ export const Practice = ({ exerciseId, baseCode }) => {
     fetch('/api/validate.php', {
       method: 'POST',
       body: formData,
-    }).then(res => { console.log(res); });
+    }).then(() => {
+      setIsWriting(false);
+    });
   };
 
   const onToggleBaseCode = () => {
