@@ -90,14 +90,7 @@ const { type, date, isObsolete = false } = phone;   /** isObsolete = false **/
 
 ```
 
-Une autre précision : il est aussi possible de "renommer" une variable :
-```javascript
-const time = { hours: 20, minutes: 35, seconds: 48 };
-const { hours: h, minutes: m } = time;
-console.log(`Il est ${h}:${m}`);
-```
-
-Avant que vous ne demandiez, oui on peut faire les deux, même si c'est pas jojo :
+Avant que vous ne demandiez, oui on peut renommer ET donner une valeur par défaut, même si c'est pas jojo :
 ```javascript
 const { name: newName = 'default' } = data;
 ``` 

@@ -56,22 +56,37 @@ console.log(formatAddress({
 
 ---
 
-## Solution :
+[//]: # (## Solution :)
 
-```javascript
-const formatAddress = address => {
-  const mandatoryAttributes = ['street', 'zipCode', 'city'];
-  if (mandatoryAttributes.some(key => !Object.prototype.hasOwnProperty.call(address, key))) {
-    return 'Adresse incomplète';
-  }
+[//]: # ()
+[//]: # (```javascript)
 
-  const { street, street2 = '', zipCode, city, ...rest } = address;
+[//]: # (const formatAddress = address => {)
 
-  return `<ul>
-        <li>${street}</li>
-        <li>${street2 || '-'}</li>
-        <li>${zipCode} ${city}</li>
-        ${Object.values(rest).map(val => `<li>${val}</li>`).join('')}
-    </ul>`;
-};
-```
+[//]: # (  const mandatoryAttributes = ['street', 'zipCode', 'city'];)
+
+[//]: # (  if &#40;mandatoryAttributes.some&#40;key => !Object.prototype.hasOwnProperty.call&#40;address, key&#41;&#41;&#41; {)
+
+[//]: # (    return 'Adresse incomplète';)
+
+[//]: # (  })
+
+[//]: # ()
+[//]: # (  const { street, street2 = '', zipCode, city, ...rest } = address;)
+
+[//]: # ()
+[//]: # (  return `<ul>)
+
+[//]: # (        <li>${street}</li>)
+
+[//]: # (        <li>${street2 || '-'}</li>)
+
+[//]: # (        <li>${zipCode} ${city}</li>)
+
+[//]: # (        ${Object.values&#40;rest&#41;.map&#40;val => `<li>${val}</li>`&#41;.join&#40;''&#41;})
+
+[//]: # (    </ul>`;)
+
+[//]: # (};)
+
+[//]: # (```)

@@ -51,27 +51,47 @@ Corrigez le code pour qu'il fonctionne !
 
 ---
     
-## Solution :
+[//]: # (## Solution :)
 
-```javascript
-const loadStorage = ({ key, defaultValue = undefined }) => {
-  try {
-    const serializedState = localStorage.getItem(key);
-    if (serializedState === null) {
-      return defaultValue;
-    }
+[//]: # ()
+[//]: # (```javascript)
 
-    return JSON.parse(serializedState);
-  } catch (err) {
-    return defaultValue;
-  }
-};
+[//]: # (const loadStorage = &#40;{ key, defaultValue = undefined }&#41; => {)
 
-const saveStorage = ({ key, ...rest }) => {
-  try {
-    localStorage.setItem(key, JSON.stringify(rest));
-  } catch {
-    console.error('Could not save to local storage');
-  }
-};
-```
+[//]: # (  try {)
+
+[//]: # (    const serializedState = localStorage.getItem&#40;key&#41;;)
+
+[//]: # (    if &#40;serializedState === null&#41; {)
+
+[//]: # (      return defaultValue;)
+
+[//]: # (    })
+
+[//]: # ()
+[//]: # (    return JSON.parse&#40;serializedState&#41;;)
+
+[//]: # (  } catch &#40;err&#41; {)
+
+[//]: # (    return defaultValue;)
+
+[//]: # (  })
+
+[//]: # (};)
+
+[//]: # ()
+[//]: # (const saveStorage = &#40;{ key, ...rest }&#41; => {)
+
+[//]: # (  try {)
+
+[//]: # (    localStorage.setItem&#40;key, JSON.stringify&#40;rest&#41;&#41;;)
+
+[//]: # (  } catch {)
+
+[//]: # (    console.error&#40;'Could not save to local storage'&#41;;)
+
+[//]: # (  })
+
+[//]: # (};)
+
+[//]: # (```)

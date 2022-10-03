@@ -1,19 +1,20 @@
 .header {
-    margin-bottom: $default-spacing;
+  margin-bottom: $default-spacing;
 
-    .logo {
-        img {
-            width: 120px;
-        }
+  .logo {
+    img {
+      width: 170px;
     }
+  }
 
-    h1 {
-        color: $color-primary;
-        margin: 0 auto 0 $default-spacing;
-    }
+  h1 {
+    color: $color-primary;
+    margin: 0 auto 0 $default-spacing;
+    padding-top: 23px;
+  }
 
-    .now {
-        font-size: 0.8rem;
-        padding: 8px;
-    }
+  .now {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
 }

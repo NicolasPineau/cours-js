@@ -93,28 +93,48 @@ validez que cela fonctionne dans votre terrain de jeu.
 
 ---
 
-## Solution :
+[//]: # (## Solution :)
 
-```javascript
-(() => {
-  const result = document.getElementById('result');
+[//]: # ()
+[//]: # (```javascript)
 
-  [...document.querySelectorAll('.keys > div')].forEach(div => {
-    div.addEventListener('click', event => {
-      event.preventDefault();
-      if (event.target.innerText === '=') {
-        try {
-          result.value = eval(result.value); // <-- ne faites JAMAIS ça :)
-        } catch (err) {
-          console.error(err);
-          result.value = 'error';
-        }
+[//]: # (&#40;&#40;&#41; => {)
 
-        return;
-      }
+[//]: # (  const result = document.getElementById&#40;'result'&#41;;)
 
-      result.value = `${result.value}${div.innerText}`;
-    });
-  });
-})();
-```
+[//]: # ()
+[//]: # (  [...document.querySelectorAll&#40;'.keys > div'&#41;].forEach&#40;div => {)
+
+[//]: # (    div.addEventListener&#40;'click', event => {)
+
+[//]: # (      event.preventDefault&#40;&#41;;)
+
+[//]: # (      if &#40;event.target.innerText === '='&#41; {)
+
+[//]: # (        try {)
+
+[//]: # (          result.value = eval&#40;result.value&#41;; // <-- ne faites JAMAIS ça :&#41;)
+
+[//]: # (        } catch &#40;err&#41; {)
+
+[//]: # (          console.error&#40;err&#41;;)
+
+[//]: # (          result.value = 'error';)
+
+[//]: # (        })
+
+[//]: # ()
+[//]: # (        return;)
+
+[//]: # (      })
+
+[//]: # ()
+[//]: # (      result.value = `${result.value}${div.innerText}`;)
+
+[//]: # (    }&#41;;)
+
+[//]: # (  }&#41;;)
+
+[//]: # (}&#41;&#40;&#41;;)
+
+[//]: # (```)

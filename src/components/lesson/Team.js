@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Pagination } from 'react-bootstrap';
 import { Person, Check, BugFill, CloudArrowUp } from 'react-bootstrap-icons';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import { useInterval } from '../../hook/interval';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { getUserInfo } from '../../lib/helper/user';
 import { Header } from '../layout/Header';
 import { loadStorage } from '../../lib/local-storage';
