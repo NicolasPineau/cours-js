@@ -22,13 +22,12 @@ function loadApiData(apiUrl) {
 
 ```javascript
 const loadApiData = apiUrl => fetch(apiUrl);
-}
 ```
 
 Un exemple pour récupérer une image (testable dans la console) :
 
 ```javascript
-fetch('http://js-licence-stv.aquaray.com/markdown-resources/pictures/congrats.gif')
+fetch('https://cours-js.vercel.app/markdown-resources/pictures/congrats.gif')
   .then(function(response) {
     return response.blob();
   })
@@ -88,12 +87,12 @@ fetch(myRequest).then(response => {
 
 ## Exercice 18 :
 <div role="alert" class="alert alert-info show">
-    Le JSON du plan du cours se trouve ici : `http://js-licence-stv.aquaray.com/markdown-resources/misc/lessons.json`.
+    Le JSON du plan du cours se trouve ici : `https://cours-js.vercel.app/markdown-resources/misc/lessons.json`.
     Au moyen de fetch, allez récupérer les informations et affichez les dans la console.
     Ensuite à partir de ces données extrayez un tableau trié par ordre alphabétique des pages content la lettre 'e'.
 </div>
 
 ```javascript_exercise18
-    const jsonUri = 'http://js-licence-stv.aquaray.com/markdown-resources/misc/lessons.json';
+    const jsonUri = 'https://cours-js.vercel.app/markdown-resources/misc/lessons.json';
     /** ?? **/
 ```
