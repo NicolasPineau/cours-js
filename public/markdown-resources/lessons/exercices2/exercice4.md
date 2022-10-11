@@ -1,11 +1,11 @@
-## Exercice 22 : Debounce 
+## Exercice 22 : Mystère 
 
 Expliquez ce que fait le code ci-dessous
 
 ---
 
 ```javascript
-function debounce (func, delay = 300) {
+function mystery (func, delay = 300) {
   let timer;
   return (...args) => {
     clearTimeout(timer);
@@ -15,7 +15,7 @@ function debounce (func, delay = 300) {
   };
 }
 
-const processChange = debounce(() => {
+const processChange = mystery(() => {
     console.log('Scroll occured');
 });
 

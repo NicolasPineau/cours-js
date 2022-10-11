@@ -89,7 +89,7 @@ fetch(myRequest).then(response => {
 <div role="alert" class="alert alert-info show">
     Le JSON du plan du cours se trouve ici : `https://cours-js.vercel.app/markdown-resources/misc/lessons.json`.
     Au moyen de fetch, allez récupérer les informations et affichez les dans la console.
-    Ensuite à partir de ces données extrayez un tableau trié par ordre alphabétique des pages content la lettre 'e'.
+    Ensuite, à partir de ces données, extrayez un tableau des pages contenant la lettre 'e' trié par ordre alphabétique.
 </div>
 
 ```javascript_exercise18
