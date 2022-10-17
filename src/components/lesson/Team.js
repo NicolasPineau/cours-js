@@ -18,10 +18,10 @@ export const Team = () => {
   const { id: currentUserId } = getUserInfo();
   const isMaster = useMaster();
 
-  const load = id => {
-    const userId = loadStorage('key') || currentUserId;
+  const userKey = loadStorage('key') || currentUserId;
 
-    fetch(`/api/data.php?exerciseId=${id}&userId=${userId}`).then(res => res.json()).then(res => {
+  const load = id => {
+    fetch(`/api/data.php?exerciseId=${id}&userId=${userKey}`).then(res => res.json()).then(res => {
       if (!res) {
         return;
       }
@@ -53,7 +53,7 @@ export const Team = () => {
       newMessage,
     }));
 
-    fetch('/api/validate.php', {
+    fetch(`/api/validate.php?userKey=${userKey}`, {
       method: 'POST',
       body: formData,
     }).then(() => {
