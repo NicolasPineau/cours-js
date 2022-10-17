@@ -10,8 +10,7 @@ import { getUserInfo } from '../../lib/helper/user';
 import {useInterval} from "../../hook/interval";
 
 export const Practice = ({ exerciseId, baseCode }) => {
-  const { name: userName } = getUserInfo();
-  const userId = loadStorage('userId');
+  const { id: userId, name: userName } = getUserInfo();
   const [code, setCode] = useState(loadStorage(`exercise${exerciseId}`) || baseCode);
   const [status, setStatus] = useState(0);
   const [isWriting, setIsWriting] = useState(false);
@@ -68,7 +67,7 @@ export const Practice = ({ exerciseId, baseCode }) => {
       newStatus,
     }));
 
-    fetch('/api/validate.php', {
+    fetch(`/api/validate.php?userKey=${userId}`, {
       method: 'POST',
       body: formData,
     }).then(() => {
