@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Pagination } from 'react-bootstrap';
+import { Button, Pagination, FormControl } from 'react-bootstrap';
 import { Person, Check, BugFill, CloudArrowUp } from 'react-bootstrap-icons';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
@@ -8,14 +8,15 @@ import { useInterval } from '../../hook/interval';
 import { getUserInfo } from '../../lib/helper/user';
 import { Header } from '../layout/Header';
 import { loadStorage } from '../../lib/local-storage';
+import { useMaster } from '../../hook/master';
 
 const exercises = [...Array(22).keys()];
 
 export const Team = () => {
   const [exerciseId, setExerciseId] = useState(1);
-  const [answsers, setAnswers] = useState([]);
-  const { name: userName, id: currentUserId } = getUserInfo();
-  const isMaster = userName === 'Nicolas Pineau' && loadStorage('key') === 'g0j1dxfuca0b11ee';
+  const [answers, setAnswers] = useState([]);
+  const { id: currentUserId } = getUserInfo();
+  const isMaster = useMaster();
 
   const load = id => {
     const userId = loadStorage('key') || currentUserId;
@@ -30,31 +31,35 @@ export const Team = () => {
     });
   };
 
-  const onChangeStatus = (userId, exerciseId, newStatus) => {
-    setAnswers(answsers.map(answer => (
-        answer.userid === userId && answer.question === exerciseId ? { ...answer, state: newStatus } : answer
-    )));
-
-    const formData = new FormData();
-    formData.append('json', JSON.stringify({
-      userId,
-      exerciseId,
-      newStatus,
-    }));
-
-    fetch('/api/validate.php', {
-      method: 'POST',
-      body: formData,
-    }).then(res => { console.log(res); });
-  };
-
-  useInterval(() => {
+  const { pause: pauseReadProcess, play: playReadProcess } = useInterval(() => {
     load(exerciseId);
   }, 3000);
 
   useEffect(() => {
     load(exerciseId);
   }, [exerciseId]);
+
+  const onChange = (userId, questionId, newStatus, newMessage) => {
+    pauseReadProcess();
+    setAnswers(answers.map(answer => (
+        answer.userid === userId && answer.question === questionId ? { ...answer, state: newStatus } : answer
+    )));
+
+    const formData = new FormData();
+    formData.append('json', JSON.stringify({
+      userId,
+      exerciseId: questionId,
+      newStatus,
+      newMessage,
+    }));
+
+    fetch('/api/validate.php', {
+      method: 'POST',
+      body: formData,
+    }).then(() => {
+      playReadProcess();
+    });
+  };
 
   return (
       <div className="team-codes">
@@ -65,7 +70,7 @@ export const Team = () => {
           </Pagination.Item>)}
         </div>
         <div className="codes">
-          {answsers.map(({ username, userid, question, answer, state }, key) => <div className="answer" key={`answer${key}`}>
+          {answers.map(({ username, userid, question, answer, state, message }, key) => <div className="answer" key={`answer${key}`}>
             <div className={`code${state === 1 ? ' code--ok' : ''}${state === 2 ? ' code--ko' : ''}${state === 3 ? ' code--ready' : ''}`}>
               <SyntaxHighlighter
                   style={a11yDark}
@@ -79,21 +84,30 @@ export const Team = () => {
                 <Person />
                 {username}
               </div>
+              {isMaster && <div className="message">
+                <FormControl
+                  maxLength={10}
+                  type="textarea"
+                  name="message"
+                  value={message}
+                  onChange={value => onChange(userid, question, state, value)}
+                />
+              </div>}
               <div className="user-actions">
                 {isMaster ? <>
-                  <Button variant="danger" onClick={() => onChangeStatus(userid, question, 2)}>
+                  <Button variant="danger" onClick={() => onChange(userid, question, 2, message)}>
                     <BugFill />
                   </Button>
-                  <Button variant="success" onClick={() => onChangeStatus(userid, question, 1)}>
+                  <Button variant="success" onClick={() => onChange(userid, question, 1, message)}>
                     <Check />
                   </Button>
-                </> : (userid === currentUserId && <Button variant="primary" onClick={() => onChangeStatus(userid, question, 3)}>
+                </> : (userid === currentUserId && <Button variant="primary" onClick={() => onChange(userid, question, 3, message)}>
                   <CloudArrowUp />
                 </Button>)}
               </div>
             </div>
           </div>)}
-          {answsers.length % 2 !== 0 && <div className="answer">
+          {answers.length % 2 !== 0 && <div className="answer">
             <div className="code" />
           </div>}
         </div>

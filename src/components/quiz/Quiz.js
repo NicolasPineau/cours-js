@@ -12,24 +12,24 @@ import {
   FormCheck
 } from 'react-bootstrap';
 import { PatchQuestionFill, PeopleFill } from 'react-bootstrap-icons';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { a11yDark, coyWithoutShadows } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 import questions from '../../resources/quiz/questions';
 import { useInterval } from '../../hook/interval';
 import { Header } from '../layout/Header';
 import { getUserInfo } from '../../lib/helper/user';
 import { loadStorage } from '../../lib/local-storage';
-import { CodeEditorEditable } from 'react-code-editor-editable';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { a11yDark, coyWithoutShadows } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { useMaster } from '../../hook/master';
 
 export const Quiz = () => {
   const [answers, setAnswers] = useState({});
   const [teams, setTeams] = useState({});
   const [scores, setScores] = useState({});
   const [questionId, setQuestionId] = useState(null);
-  const { name: userName, id: tempUserId } = getUserInfo();
+  const { id: tempUserId } = getUserInfo();
   const masterKey = loadStorage('key');
-  const isMaster = userName === 'Nicolas Pineau' && masterKey === 'g0j1dxfuca0b11ee';
+  const isMaster = useMaster();
   const userId = masterKey || tempUserId;
 
   useInterval(() => {
@@ -56,7 +56,6 @@ export const Quiz = () => {
 
   useEffect(() => {
     fetch(`/api/getanswers.php?userId=${userId}`).then(res => res.json()).then(res => {
-      console.log(res);
       if (!res) {
         return;
       }

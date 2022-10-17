@@ -13,7 +13,7 @@ $rows = $db->fetchAll(<<<SQL
         ON users.userid = teamate.userid
     WHERE users.userid <> :adminUserId
 SQL,
-  ['adminUserId' => 'g0j1dxfuca0b11ee']
+  ['adminUserId' => $_ENV['MASTER_KEY']]
 );
 
 echo json_encode($rows);

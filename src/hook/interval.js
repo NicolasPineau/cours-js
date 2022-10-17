@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useInterval = (callback, delay = null) => {
   const savedCallback = useRef();
+  const [active, setActive] = useState(true);
 
   useEffect(() => {
     savedCallback.current = callback;
@@ -9,14 +10,24 @@ export const useInterval = (callback, delay = null) => {
 
   useEffect(() => {
     const tick = () => {
-      savedCallback.current();
+      active && savedCallback.current();
     };
 
     if (delay !== null) {
-      const id = setInterval(tick, delay);
+      const id = active && setInterval(tick, delay);
+
       return () => {
-        clearInterval(id);
+        id && clearInterval(id);
       }
     }
-  }, [delay]);
+  }, [delay, active]);
+
+  return {
+    pause() {
+      setActive(false);
+    },
+    play() {
+      setActive(true);
+    },
+  };
 };
