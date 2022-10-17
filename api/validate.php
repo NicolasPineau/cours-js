@@ -6,13 +6,23 @@ $db = Db::getInst();
 
 $data = json_decode($_POST['json'], TRUE);
 
-$status = 1;
-$query = $db->execute(
-  'UPDATE answers SET state = :state, message = :message WHERE userid = :userId AND question = :questionId',
-  [
-    'state' => $data['newStatus'],
-    'message' => $data['newMessage'] ?? '',
-    'userId' => $data['userId'],
-    'questionId' => $data['exerciseId'],
-  ]
-);
+if ($_GET['userKey'] === $_ENV['MASTER_KEY']) {
+  $query = $db->execute(
+    'UPDATE answers SET state = :state, message = :message WHERE userid = :userId AND question = :questionId',
+    [
+      'state' => $data['newStatus'],
+      'message' => $data['newMessage'] ?? '',
+      'userId' => $data['userId'],
+      'questionId' => $data['exerciseId'],
+    ]
+  );
+} elseif ($_GET['userKey'] === $data['userId']) {
+  $query = $db->execute(
+    'UPDATE answers SET state = :state, message = :message WHERE userid = :userId AND question = :questionId',
+    [
+      'state' => $data['newStatus'],
+      'userId' => $data['userId'],
+      'questionId' => $data['exerciseId'],
+    ]
+  );
+}

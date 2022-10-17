@@ -1,3 +1,3 @@
 <?php
 
-echo json_encode($_GET['key'] === $_ENV['MASTER_KEY']);
+echo json_encode($_GET['key'] ?? '' === $_ENV['MASTER_KEY']);
