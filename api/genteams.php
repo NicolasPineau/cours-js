@@ -2,7 +2,7 @@
 
 include 'Db.php';
 
-if ($_GET['userId'] !== 'g0j1dxfuca0b11ee') {
+if ($_GET['userId'] !== $_ENV['MASTER_KEY']) {
   exit;
 }
 
@@ -18,7 +18,7 @@ $userid = function (string $player) {
 
 $res = $db->fetchAll(
   'SELECT userid, level FROM users WHERE userid <> :adminId',
-  ['adminId' => 'g0j1dxfuca0b11ee'
+  ['adminId' => $_ENV['MASTER_KEY']
 ]);
 
 $players = [];

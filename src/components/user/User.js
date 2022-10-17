@@ -10,12 +10,13 @@ import {
 
 import { getUserInfo, setUserInfo } from '../../lib/helper/user';
 import { useDebounce } from '../../hook/debounce';
-import {loadStorage} from "../../lib/local-storage";
+import { loadStorage } from '../../lib/local-storage';
+import { useMaster } from '../../hook/master';
 
 export const User = () => {
   const masterKey = loadStorage('key');
   const [userInfo, updateUserInfo] = useState(getUserInfo());
-  const isMaster = masterKey === 'g0j1dxfuca0b11ee';
+  const isMaster = useMaster();
   const debouncedInfo = useDebounce(userInfo);
 
   const onChangeUserInfo = ({ target: { name, value } }) => {
@@ -123,7 +124,7 @@ export const User = () => {
                 <FormControl as="select" onChange={({ target: { selectedIndex: value }}) => onChangeUserInfo({ target: { name: 'level', value }})}>
                   <option>Votre niveau...</option>
                   {levels.map(({ value, title }) => (
-                    <option selected={value === +userInfo.level} value={value}>{title}</option>
+                    <option key={value} selected={value === +userInfo.level} value={value}>{title}</option>
                   ))}
                 </FormControl>
               </InputGroup>
