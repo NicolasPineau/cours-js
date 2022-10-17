@@ -29,6 +29,9 @@
     },
     "api/validate.php": {
       "runtime": "vercel-php@0.5.2"
+    },
+    "api/master.php": {
+      "runtime": "vercel-php@0.5.2"
     }
   }
 }
