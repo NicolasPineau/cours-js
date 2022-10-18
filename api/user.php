@@ -13,10 +13,10 @@ $query = $db->execute(
 
 $query = $db->execute(
   'INSERT IGNORE INTO users (userid, name, level) VALUES(:userId, :userName, :level)',
-  ['userId' => $data['id'], 'userName' => $data['name'], 'level' => $data['level']]
+  ['userId' => $data['id'], 'userName' => $data['name'], 'level' => $data['level'] ?? 0]
 );
 
 $query = $db->execute(
   'UPDATE users SET level = :level, name = :userName WHERE userid = :userId',
-  ['level' => $data['level'], 'userName' => $data['name'], 'userId' =>  $data['id']]
+  ['level' => $data['level'] ?? 0, 'userName' => $data['name'], 'userId' =>  $data['id']]
 );
