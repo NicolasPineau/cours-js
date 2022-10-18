@@ -21,17 +21,16 @@ import { Header } from '../layout/Header';
 import { getUserInfo } from '../../lib/helper/user';
 import { loadStorage } from '../../lib/local-storage';
 import { useMaster } from '../../hook/master';
-import {api} from "../../lib/helper/api";
+import { api } from '../../lib/helper/api';
 
 export const Quiz = () => {
   const [answers, setAnswers] = useState({});
   const [teams, setTeams] = useState({});
   const [scores, setScores] = useState({});
   const [questionId, setQuestionId] = useState(null);
-  const { id: tempUserId } = getUserInfo();
+  const { id: userId } = getUserInfo();
   const masterKey = loadStorage('key');
   const isMaster = useMaster();
-  const userId = masterKey || tempUserId;
 
   useInterval(() => {
     api('question').then(res => res.json()).then(activeQuestionId => {
@@ -66,7 +65,7 @@ export const Quiz = () => {
   }, []);
 
   const changeQuestion = id => {
-    api('setquestion', { userId, questionId: id }).then(() => {});
+    api('setquestion', { userKey: masterKey, questionId: id }).then(() => {});
   };
 
   const chooseAnswer = answer => {
@@ -85,7 +84,7 @@ export const Quiz = () => {
   };
 
   const generateTeams = () => {
-    api('genteams', { userId }).then(() => {});
+    api('genteams', { userId, userKey: masterKey }).then(() => {});
   };
 
   const activeQuestion = questionId && questions.find(({ id }) => id === questionId);
@@ -148,7 +147,7 @@ export const Quiz = () => {
                     {id}
                   </Pagination.Item>)}
                 </div>}
-                {activeQuestion && <>
+                {activeQuestion ? <>
                   <h3>Question #{questionId}</h3>
                   <Card>
                     <Card.Body>{activeQuestion.question}</Card.Body>
@@ -183,7 +182,7 @@ export const Quiz = () => {
                       ))}
                     </div>
                   </Container>
-                </>}
+                </> : <></>}
               </div>
             </Col>
           </Row>

@@ -3,7 +3,7 @@
     "id": 1,
     "question": "Indiquez lequel de ces codes est correct.",
     "choices": [
-      "for (const i=0; i<scores.length; i++) { \n    console.log(scores[i]);\n}",
+      "let scores = [75, 80, 95];\nfor (const i=0; i<scores.length; i++) { \n    console.log(scores[i]);\n}",
       "let scores = [75, 80, 95];\nfor (const score of scores) {\n    console.log(score);\n}"
     ]
   },
@@ -40,7 +40,7 @@
     "question": "Laquelle de ces instructions permettra de récupérer les couleurs des yeux des enfants de moins de 12 ans ?",
     "code": "const kids = [\n  { age: 8, eyeColor: 'blue'},\n  { age: 11, eyeColor: 'green'},\n  { age: 14, eyeColor: 'gray'},\n]",
     "choices": [
-      "const colors = new Set([...kids.map(({ eyeColor }) => eyeColor)];",
+      "const colors = [...new Set(kids.map(({ eyeColor }) => eyeColor))];",
       "const colors = kids.reduce((acc, { eyeColor }) => ([eyeColor]), [])",
       "const colors = Object.values(kids).map({ eyeColor }).join();"
     ]
@@ -185,7 +185,7 @@
   },
   {
     "id": 20,
-    "question": "Qu'avez-vous pensé du cours ?",
+    "question": "Qu'avez-vous pensé du cours jusqu'ici ?",
     "choices": [
       "Tout pourri :(",
       "Bof bof :/",
