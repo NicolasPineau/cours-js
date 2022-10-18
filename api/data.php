@@ -4,7 +4,7 @@ include 'Db.php';
 
 $db = Db::getInst();
 
-if ($_GET['userId'] === $_ENV['MASTER_KEY']) {
+if ($_GET['userId'] === getenv('MASTER_KEY')) {
   $rows = $db->fetchAll(
     'SELECT * FROM answers WHERE question = :questionId ORDER BY username',
     ['questionId' => $_GET['exerciseId']]

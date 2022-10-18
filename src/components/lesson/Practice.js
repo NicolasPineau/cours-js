@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Navbar, Button } from 'react-bootstrap';
 import { CodeEditorEditable } from 'react-code-editor-editable'
-import { CloudArrowUp, Code, PencilSquare, XOctagonFill } from 'react-bootstrap-icons';
+import { CloudArrowUp, Code, PencilSquare, XOctagonFill, MegaphoneFill } from 'react-bootstrap-icons';
 import 'highlight.js/styles/dracula.css';
 
 import { loadStorage, saveStorage } from '../../lib/local-storage';
 import { useDebounce } from '../../hook/debounce';
 import { getUserInfo } from '../../lib/helper/user';
-import {useInterval} from "../../hook/interval";
+import { useInterval } from '../../hook/interval';
+import { api } from '../../lib/helper/api';
 
 export const Practice = ({ exerciseId, baseCode }) => {
   const { id: userId, name: userName } = getUserInfo();
   const [code, setCode] = useState(loadStorage(`exercise${exerciseId}`) || baseCode);
   const [status, setStatus] = useState(0);
+  const [message, setMessage] = useState('');
   const [isWriting, setIsWriting] = useState(false);
   const [touched, setTouched] = useState(false);
   const [viewBaseCode, setViewBaseCode] = useState(false);
@@ -23,8 +25,11 @@ export const Practice = ({ exerciseId, baseCode }) => {
       return;
     }
 
-    fetch(`/api/data.php?exerciseId=${exerciseId}&userId=${userId}`).then(res => res.json()).then(res => {
-      res && setStatus(+res.state);
+    api('data', { exerciseId, userId }).then(res => res.json()).then(res => {
+      if (res) {
+        setStatus(+res.state);
+        setMessage(res.message || '');
+      }
     });
   };
 
@@ -45,7 +50,7 @@ export const Practice = ({ exerciseId, baseCode }) => {
       code: debouncedCode
     }));
 
-    fetch('/api/save.php', {
+    api('save', {}, {
       method: 'POST',
       body: formData,
     }).then(res => { console.log(res); });
@@ -67,7 +72,7 @@ export const Practice = ({ exerciseId, baseCode }) => {
       newStatus,
     }));
 
-    fetch(`/api/validate.php?userKey=${userId}`, {
+    api('validate', { userKey: userId }, {
       method: 'POST',
       body: formData,
     }).then(() => {
@@ -97,6 +102,11 @@ export const Practice = ({ exerciseId, baseCode }) => {
         language="javascript"
         inlineNumbers
       />
+      {message && <div className="message"><MegaphoneFill />
+        {message.split('\n').map((item, key) => (
+          <span key={key}>{item}<br/></span>
+        ))}
+      </div>}
       {code && code !== baseCode && <div className="actions flex flex--space-between">
         {(status !== 1 && status !== 3) && <Button variant="success" onClick={() => onChangeStatus(3)}>
           Valider <CloudArrowUp />

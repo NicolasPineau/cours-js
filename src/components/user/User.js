@@ -12,6 +12,7 @@ import { getUserInfo, setUserInfo } from '../../lib/helper/user';
 import { useDebounce } from '../../hook/debounce';
 import { loadStorage } from '../../lib/local-storage';
 import { useMaster } from '../../hook/master';
+import { api } from '../../lib/helper/api';
 
 export const User = () => {
   const masterKey = loadStorage('key');
@@ -46,7 +47,7 @@ export const User = () => {
       level,
     }));
 
-    fetch('/api/user.php', {
+    api('user', {}, {
       method: 'POST',
       body: formData,
     }).then(res => { console.log(res); });
