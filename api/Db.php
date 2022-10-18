@@ -4,13 +4,15 @@ class Db {
   private PDO $connection;
 
   private function __construct() {
+    $options = !empty(getenv('PLANETSCALE_SSL_CERT_PATH') ?? '') ? [
+      PDO::MYSQL_ATTR_SSL_CA => getenv('PLANETSCALE_SSL_CERT_PATH')
+    ] : null;
+
     $this->connection = new PDO(
-      sprintf('mysql:host=%s;dbname=%s', $_ENV['PLANETSCALE_DB_HOST'], $_ENV['PLANETSCALE_DB']),
-      $_ENV['PLANETSCALE_DB_USERNAME'],
-      $_ENV['PLANETSCALE_DB_PASSWORD'],
-      [
-        PDO::MYSQL_ATTR_SSL_CA => $_ENV['PLANETSCALE_SSL_CERT_PATH'],
-      ]
+      sprintf('mysql:host=%s;dbname=%s', getenv('PLANETSCALE_DB_HOST'), getenv('PLANETSCALE_DB')),
+      getenv('PLANETSCALE_DB_USERNAME'),
+      getenv('PLANETSCALE_DB_PASSWORD'),
+      $options
     );
   }
 

@@ -1,6 +1,6 @@
 <?php
 
-if ($_GET['userId'] !== $_ENV['MASTER_KEY']) {
+if ($_GET['userId'] !== getenv('MASTER_KEY')) {
   exit;
 }
 

@@ -21,6 +21,7 @@ import { Header } from '../layout/Header';
 import { getUserInfo } from '../../lib/helper/user';
 import { loadStorage } from '../../lib/local-storage';
 import { useMaster } from '../../hook/master';
+import {api} from "../../lib/helper/api";
 
 export const Quiz = () => {
   const [answers, setAnswers] = useState({});
@@ -33,11 +34,11 @@ export const Quiz = () => {
   const userId = masterKey || tempUserId;
 
   useInterval(() => {
-    fetch('/api/question.php').then(res => res.json()).then(activeQuestionId => {
+    api('question').then(res => res.json()).then(activeQuestionId => {
       setQuestionId(+activeQuestionId);
     });
 
-    fetch(`/api/teams.php?userId=${userId}`).then(res => res.json()).then(res => {
+    api('teams', { userId }).then(res => res.json()).then(res => {
       if (!res) {
         return;
       }
@@ -55,7 +56,7 @@ export const Quiz = () => {
   }, 1000);
 
   useEffect(() => {
-    fetch(`/api/getanswers.php?userId=${userId}`).then(res => res.json()).then(res => {
+    api('getanswers', { userId }).then(res => res.json()).then(res => {
       if (!res) {
         return;
       }
@@ -65,7 +66,7 @@ export const Quiz = () => {
   }, []);
 
   const changeQuestion = id => {
-    fetch(`/api/setquestion.php?userId=${userId}&questionId=${id}`);
+    api('setquestion', { userId, questionId: id }).then(() => {});
   };
 
   const chooseAnswer = answer => {
@@ -77,14 +78,14 @@ export const Quiz = () => {
       answer,
     }));
 
-    fetch('/api/setanswer.php', {
+    api('setanswer', {}, {
       method: 'POST',
       body: formData,
     }).then(res => { console.log(res); });
   };
 
   const generateTeams = () => {
-    fetch(`/api/genteams.php?userId=${userId}`);
+    api('genteams', { userId }).then(() => {});
   };
 
   const activeQuestion = questionId && questions.find(({ id }) => id === questionId);

@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Pagination, FormControl } from 'react-bootstrap';
+import React, { useCallback, useState, useEffect } from 'react';
+import { Button, Pagination } from 'react-bootstrap';
 import { Person, Check, BugFill, CloudArrowUp } from 'react-bootstrap-icons';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { debounce } from 'lodash';
+import TextareaAutosize from 'react-textarea-autosize';
 
 import { useInterval } from '../../hook/interval';
 import { getUserInfo } from '../../lib/helper/user';
 import { Header } from '../layout/Header';
 import { loadStorage } from '../../lib/local-storage';
 import { useMaster } from '../../hook/master';
+import { api } from '../../lib/helper/api';
 
 const exercises = [...Array(22).keys()];
 
@@ -21,7 +24,7 @@ export const Team = () => {
   const userKey = loadStorage('key') || currentUserId;
 
   const load = id => {
-    fetch(`/api/data.php?exerciseId=${id}&userId=${userKey}`).then(res => res.json()).then(res => {
+    api('data', { exerciseId: id, userId: userKey }).then(res => res.json()).then(res => {
       if (!res) {
         return;
       }
@@ -53,13 +56,15 @@ export const Team = () => {
       newMessage,
     }));
 
-    fetch(`/api/validate.php?userKey=${userKey}`, {
+    api('validate', { userKey }, {
       method: 'POST',
       body: formData,
     }).then(() => {
       playReadProcess();
     });
   };
+
+  const debouncedChange = useCallback(debounce((...values) => onChange(...values), 300), [answers]);
 
   return (
       <div className="team-codes">
@@ -84,15 +89,6 @@ export const Team = () => {
                 <Person />
                 {username}
               </div>
-              {isMaster && <div className="message">
-                <FormControl
-                  maxLength={10}
-                  type="textarea"
-                  name="message"
-                  value={message}
-                  onChange={value => onChange(userid, question, state, value)}
-                />
-              </div>}
               <div className="user-actions">
                 {isMaster ? <>
                   <Button variant="danger" onClick={() => onChange(userid, question, 2, message)}>
@@ -106,10 +102,16 @@ export const Team = () => {
                 </Button>)}
               </div>
             </div>
+            {isMaster && <div className="message">
+                <TextareaAutosize
+                  maxRows={5}
+                  key={`${userid}_${question}`}
+                  name="message"
+                  defaultValue={message}
+                  onChange={({ target: { value } }) => debouncedChange(userid, question, state, value)}
+                />
+            </div>}
           </div>)}
-          {answers.length % 2 !== 0 && <div className="answer">
-            <div className="code" />
-          </div>}
         </div>
         <div className="footer">
           <Button variant="primary" onClick={() => window.history.back()}>

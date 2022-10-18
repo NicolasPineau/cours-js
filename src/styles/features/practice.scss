@@ -21,4 +21,21 @@
             margin: $default-spacing / 2;
         }
     }
+
+    .message {
+        background-color: #0086ff;
+        color: white;
+        line-height: 1.5;
+        font-weight: 500;
+        border-radius: 20px 20px 0 20px;
+        padding: 20px 20px 20px 40px;
+        margin: 10px;
+        position: relative;
+
+        > svg {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+    }
 }
