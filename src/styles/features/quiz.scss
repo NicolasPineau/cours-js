@@ -36,5 +36,10 @@
         .code {
             margin-left: 30px;
         }
+
+        .submit-answer:disabled {
+            opacity: 0.3;
+            margin-left: 31px;
+        }
     }
 }

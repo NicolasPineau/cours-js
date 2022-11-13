@@ -25,6 +25,7 @@ import { api } from '../../lib/helper/api';
 
 export const Quiz = () => {
   const [answers, setAnswers] = useState({});
+  const [currentAnswer, setCurrentAnswer] = useState(null);
   const [teams, setTeams] = useState({});
   const [scores, setScores] = useState({});
   const [questionId, setQuestionId] = useState(null);
@@ -37,6 +38,10 @@ export const Quiz = () => {
       setQuestionId(+activeQuestionId);
     });
 
+    updateTeams(false);
+  }, 1000);
+
+  const updateTeams = (updateScores = true) => {
     api('teams', { userId }).then(res => res.json()).then(res => {
       if (!res) {
         return;
@@ -47,12 +52,17 @@ export const Quiz = () => {
         [teamname]: [...new Set((acc[teamname] || []).concat(name))],
       }), {}));
 
-      setScores(res.reduce((acc, { teamname, score }) => ({
+      updateScores && setScores(res.reduce((acc, { teamname, score }) => ({
         ...acc,
         [teamname]: score,
       }), {}));
     });
-  }, 1000);
+  };
+
+  useEffect(() => {
+    updateTeams(true);
+    setCurrentAnswer(null);
+  }, [questionId]);
 
   useEffect(() => {
     api('getanswers', { userId }).then(res => res.json()).then(res => {
@@ -69,12 +79,16 @@ export const Quiz = () => {
   };
 
   const chooseAnswer = answer => {
-    setAnswers({ ...answers, [questionId]: answer });
+    setCurrentAnswer(answer);
+  };
+
+  const submitAnswer = () => {
+    setAnswers({ ...answers, [questionId]: currentAnswer });
     const formData = new FormData();
     formData.append('json', JSON.stringify({
       userId,
       questionId,
-      answer,
+      answer: currentAnswer,
     }));
 
     api('setanswer', {}, {
@@ -169,7 +183,7 @@ export const Quiz = () => {
                               name="group1"
                               type="radio"
                               disabled={typeof answers[questionId] === 'number'}
-                              checked={answers[questionId] === choiceKey}
+                              checked={currentAnswer === choiceKey}
                               onChange={() => chooseAnswer(choiceKey)}
                           />
                           <SyntaxHighlighter
@@ -180,6 +194,16 @@ export const Quiz = () => {
                           />
                         </div>
                       ))}
+                      <div>
+                        <Button
+                          variant="primary"
+                          className="submit-answer"
+                          disabled={currentAnswer === null || typeof answers[questionId] === 'number'}
+                          onClick={() => submitAnswer()}
+                        >
+                          OK
+                        </Button>
+                      </div>
                     </div>
                   </Container>
                 </> : <></>}
