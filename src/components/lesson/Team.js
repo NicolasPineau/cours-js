@@ -13,7 +13,7 @@ import { loadStorage } from '../../lib/local-storage';
 import { useMaster } from '../../hook/master';
 import { api } from '../../lib/helper/api';
 
-const exercises = [...Array(22).keys()];
+const exercises = [...Array(30).keys()];
 
 export const Team = () => {
   const [exerciseId, setExerciseId] = useState(1);
