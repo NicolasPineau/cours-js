@@ -52,5 +52,11 @@
       "exercice3": "Complétez le store",
       "exercice4": "Mystère"
     }
+  },
+  "exercices3": {
+    "title": "Exercices d'entraînement 3",
+    "pages": {
+      "exercices1": "Déstructuration et décomposition"
+    }
   }
 }
