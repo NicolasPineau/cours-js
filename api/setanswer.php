@@ -16,24 +16,24 @@ $db->execute(
 );
 
 $goodAnswers = [
-  1 => 1,
-  2 => 2,
-  3 => 1,
-  4 => 2,
-  5 => 0,
-  6 => 3,
+  1 => 0,
+  2 => 0,
+  3 => 2,
+  4 => 0,
+  5 => 1,
+  6 => 2,
   7 => 0,
-  8 => 1,
-  9 => 1,
-  10 => 3,
-  11 => 2,
+  8 => 0,
+  9 => 3,
+  10 => 2,
+  11 => 1,
   12 => 1,
-  13 => 1,
-  14 => 0,
+  13 => 100,
+  14 => 1,
   15 => 2,
-  16 => 0,
-  17 => 1,
-  18 => 1,
+  16 => 4,
+  17 => 2,
+  18 => 0,
   19 => 0,
   20 => 2,
 ];
@@ -50,7 +50,7 @@ $row = $db->fetch(
 );
 $teamName = $row['teamname'];
 
-$points = $goodAnswers[$data['questionId']] === (int) $data['answer'] ? $level : -$level;
+$points = ($goodAnswers[$data['questionId']] === 100 || $goodAnswers[$data['questionId']] === (int) $data['answer']) ? $level : -$level;
 
 $db->execute(
   'UPDATE teams SET score = score + :points WHERE name = :teamName',

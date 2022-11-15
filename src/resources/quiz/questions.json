@@ -1,195 +1,210 @@
 [
   {
     "id": 1,
-    "question": "Indiquez lequel de ces codes est correct.",
+    "question": "Quelle type de données renvoie la méthode `map` du prototype des tableaux ?",
     "choices": [
-      "let scores = [75, 80, 95];\nfor (const i=0; i<scores.length; i++) { \n    console.log(scores[i]);\n}",
-      "let scores = [75, 80, 95];\nfor (const score of scores) {\n    console.log(score);\n}"
+      "// Un type tableau",
+      "// `map` ne renvoie pas de valeur",
+      "// Cela dépend de ce que l'on renvoie dans la fonction de callback"
     ]
   },
   {
     "id": 2,
-    "question": "Quelle expression utiliseriez-vous pour afficher le nom de l'utilisateur en gras ?",
+    "question": "Qu'affichera ce code dans la console ?",
+    "code": "console.log([['a','b'],['c'],['d','e','f']].reduce((acc, value) => [...acc, ...value], []))",
     "choices": [
-      "myDiv.innerHTML = ${user.firstName} <b>${user.lastName}</b>;",
-      "myDiv.innerHTML = user.firstName + '<b>' + user.lastName + '</b>';",
-      "myDiv.innerHTML = `${user.firstName} <b>${user.lastName}</b>`;"
+      "['a', 'b', 'c', 'd', 'e', 'f']",
+      "[['a','b'],['c'],['d','e','f']]",
+      "[]",
+      "undefined"
     ]
   },
   {
     "id": 3,
-    "question": "Quelle syntaxe est incorrecte ?",
+    "question": "Que désigne le concept de `early return` dans une méthode ?",
     "choices": [
-      "const onLocalChange = ({ target: { name, value } }) => \n    onChange(name, value)\n",
-      "const onLocalChange ({ target: { name, value } }) => onChange(name, value);",
-      "const onLocalChange = function({ target: { name, value } }) {\n    onChange(name, value);\n}"
+      "// Le fait d'utiliser l'instruction return dans les fonctions fléchées plutôt que les autres syntaxes.",
+      "// Le fait renvoyer une variable contenant les données à renvoyer plutôt que le résultat d'une expression.",
+      "// Le fait de traiter en premier lieu les conditions simples conduisant à sortir de la méthode."
     ]
   },
   {
     "id": 4,
-    "question": "Laquelle de ces instructions permettra de récupérer la remise dans une variable appelée discount ?",
-    "code": "const data = { orders: [{ id: 10, price: 120, discount: 15 }] };",
+    "question": "Ce code permet-il d'injecter les valeurs 10 et 20 dans le tableau `numbers` ?",
+    "code": "const numbers = [];\nconst obj = { a: 10, b: 20 };\n({ a: numbers[0], b: numbers[1] } = obj);",
     "choices": [
-      "const [{ discount }] = data;",
-      "const {[ discount ]} = data;",
-      "const { orders: [{ discount }] } = data;"
+      "// OUI",
+      "// NON",
+      "// PEUT-ÊTRE"
     ]
   },
   {
     "id": 5,
-    "question": "Laquelle de ces instructions permettra de récupérer les couleurs des yeux des enfants de moins de 12 ans ?",
-    "code": "const kids = [\n  { age: 8, eyeColor: 'blue'},\n  { age: 11, eyeColor: 'green'},\n  { age: 14, eyeColor: 'gray'},\n]",
+    "question": "Que va afficher ce code dans la console ?",
+    "code": "fetch('/api').then(\n  response => {\n    return Promise.reject('invalid call');\n  },\n  error => {\n    console.error(`Error : ${error}`);\n  }\n);",
     "choices": [
-      "const colors = [...new Set(kids.map(({ eyeColor }) => eyeColor))];",
-      "const colors = kids.reduce((acc, { eyeColor }) => ([eyeColor]), [])",
-      "const colors = Object.values(kids).map({ eyeColor }).join();"
+      "// Error: invalid call",
+      "// Uncaught (in promise) invalid call",
+      "// Rien"
     ]
   },
   {
     "id": 6,
-    "question": "Laquelle de ces instructions n'est pas un export nommé ?",
+    "question": "Quel code affichera 'Alea Jacta Est' ?",
+    "code": "const value = 'alea jacta est';",
     "choices": [
-      "export const value = 10;",
-      "const myFunc = num => num * num;\n\nexport { myFunc };",
-      "export { data as usefulData };",
-      "export default class {\n  /** ... */\n}"
+      "value.replace(/ ([a-z])/g, value => value.toUpperCase())",
+      "value.split(' ').map(([first, ...word]) => first.toUpperCase() + word.join()).join(' ');",
+      "value.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ');"
     ]
   },
   {
     "id": 7,
     "question": "Qu'affiche ce code dans la console ?",
-    "code": "console.log(\"hello\".includes(\"ell\", 1));",
+    "code": "let result = '';\nlet i = 0;\n\ndo {\n  i = i + 1;\n  result = result + i;\n} while (i < 5);\n\nconsole.log(result);",
     "choices": [
-      "true",
-      "false",
-      "rien"
+      "12345",
+      "5",
+      "4"
     ]
   },
   {
     "id": 8,
-    "question": "Parmi ces instructions, indiquez celle qui va créer un objet dont les clés seront les id du tableau suivant",
-    "code": "const data = [\n  { id: 10, type: 'oak' },\n  { id: 22, type: 'poplar' },\n  { id: 35, type: 'chestnut' },\n]",
+    "question": "Cette condition se vérifie si...",
+    "code": "if (Object.entries(obj).some(([key, value]) => key === value)) { ... }",
     "choices": [
-      "data.reduce((acc, { id, ...rest }) => ({ ...acc, id: rest }), {})",
-      "data.reduce((acc, { id, ...rest }) => ({ ...acc, [id]: rest }), {})",
-      "data.reduce((acc, { id, ...rest }) => ( ...acc, { [id]: rest } ), {})"
+      "// Toutes les entrées de l'objet obj comportent une clé strictement égale à la valeur.",
+      "// L'objet obj contient au moins une entrée pour laquelle le nom de la clé est strictement égale à la valeur.",
+      "// L'objet obj est bien un objet.",
+      "// ... la condition ne se vérifiera jamais."
     ]
   },
   {
     "id": 9,
-    "question": "Indiquez le moyen le plus approprié pour créer un objet avec ces coordonnées.",
-    "code": "const x = 5, y = 10;",
+    "question": "Quelle sera la valeur de `y` après exécution du code suivant ?",
+    "code": "const x = {};\nconst y = typeof x === 'object' ? { ...x, val: x.value || 'default' } : -1;",
     "choices": [
-      "const coordinates = { x: x, y: y };",
-      "const coordinates = { x, y };",
-      "const coordinates = [ x, y ];"
+      "-1",
+      "true",
+      "{ val: null }",
+      "{ val: 'default' }"
     ]
   },
   {
     "id": 10,
-    "question": "Laquelle de ces syntaxes n'est pas valide ?",
+    "question": "Quelle sera la valeur de `userName` après exécution du code suivant ?",
+    "code": "const { name: userName = 'unknown' } = { name: null };",
     "choices": [
-      "const storage = {\n  read (key) {\n    /** ... **/\n  },\n  write (key, data) {\n     /** ... **/\n  }\n};",
-      "const storage = {\n  read: function (key) {\n    /** ... **/\n  },\n  write: function  (key, data) {\n     /** ... **/\n  }\n};",
-      "const storage = {\n  read: (key) => {\n    /** ... **/\n    },\n  write: (key, data) => {\n     /** ... **/\n  }\n};",
-      "aucune"
+      "// unknown",
+      "// undefined",
+      "// null"
     ]
   },
   {
     "id": 11,
-    "question": "Quelle sera le contenu de newFruits ?",
-    "code": "const fruits = ['apple', 'banana', 'orange'];\nconst newFruits = fruits.forEach(fruit => fruit.toUpperCase());",
+    "question": "Que va afficher ce code ?",
+    "code": "class Logger {\n    log(...messages) {\n        console.log(typeof messages);\n    }\n}\n\n(new Logger()).log(\"err1\", \"err2\")",
     "choices": [
-      "['APPLE', 'BANANA', 'ORANGE']",
-      "[undefined, undefined, undefined]",
-      "undefined"
+      "string",
+      "object",
+      "array"
     ]
   },
   {
     "id": 12,
-    "question": "Quel code devrait-on utiliser pour vérifier si au moins une commande dépasse 500€ ?",
+    "question": "Quel code devrait-on utiliser pour vérifier si tous les films sont des comédies ?",
+    "code": "const films = apiFilms.getAll();",
     "choices": [
-      "orders.filter(({ amount }) => amount > 500)",
-      "orders.some(({ amount }) => amount > 500)",
-      "orders.every(({ amount }) => amount > 500)",
-      "orders.find(({ amount }) => amount > 500)"
+      "films.any(({ genre }) => genre === 'comedy')",
+      "films.every(({ genre }) => genre === 'comedy')",
+      "films.all(({ genre }) => genre === 'comedy')",
+      "films.each(({ genre }) => genre === 'comedy')"
     ]
   },
   {
     "id": 13,
-    "question": "Par quoi remplacer les XXXXX pour obtenir un résultat cohérent ?",
-    "code": "const games = ['dices', 'cards', 'marbles'];\nalert(`Les billes sont à la position ${games.XXXXXX(game => game === 'marbles')}`);",
+    "question": "Quelle instruction permettra d'afficher le nom du gagnant ?",
+    "code": "const data = {\n  gameData: {\n    game1: {\n      players: [\n        {\n          name: 'Oliver'\n        },\n        {\n          name: 'Susan',\n          winner: true,\n        },\n        {\n          name: 'Luke',\n        },\n      ],\n    },\n  },\n};",
     "choices": [
-      "find",
-      "findIndex",
-      "match"
+      "const { name } = data.gameData.game1.players[1];\nconsole.log(name);",
+      "const [_, { name }] = data.gameData.game1.players;\nconsole.log(name);",
+      "const { players: [_, { name }] } = data.gameData.game1;\nconsole.log(name);",
+      "const { game1: { players: [_, { name }] } } = data.gameData;\nconsole.log(name);",
+      "const { gameData: { game1: { players: [_, { name } ] } } } = data;\nconsole.log(name);"
     ]
   },
   {
     "id": 14,
-    "question": "Que manque-il dans le constructeur de Rectangle pour appeler le constructeur parent ?",
-    "code": "class Shape {\n  constructor (id, x, y) {\n    this.id = id\n    this.move(x, y)\n  }\n  move (x, y) {\n    this.x = x\n    this.y = y\n  }\n}\n\nclass Rectangle extends Shape {\n  constructor (id, x, y, width, height) {\n    /** ??? ***/\n    this.width  = width\n    this.height = height\n  }\n}",
+    "question": "Que va afficher ce code dans la console ?",
+    "code": "\"keep clear\".startsWith(\"keep\", 1) && console.log(\"ok\");",
     "choices": [
-      "super(id, x, y)",
-      "parent::constructor(id, x, y)",
-      "super(this)"
+      "// ok",
+      "// rien",
+      "// keep clear",
+      "// false"
     ]
   },
   {
     "id": 15,
-    "question": "A la lecture de ce code, que peut-on déduire de l'endpoint '/api/documents' ?",
-    "code": "return fetch('/api/documents', {\n    headers: new Headers(headers),\n    credentials: 'same-origin',\n    method: 'POST',\n    body: formData,\n  }).then(\n    response => (response.ok ? response.json() : Promise.reject()),\n  ).catch(\n    error => console.error(error)\n  );",
+    "question": "Que va afficher ce code dans la console ?",
+    "code": "console.log((v => v + 1)(5))",
     "choices": [
-      "Son content-type est text/plain",
-      "Son content-type est text/html",
-      "Son content-type est application/json"
+      "// (v => v + 1)(5)",
+      "// unefined",
+      "// 6",
+      "// function()"
     ]
   },
   {
     "id": 16,
-    "question": "Par quoi remplaceriez-vous XXXX ?",
-    "code": "function fetch_data() {\n  return fetch('current-data.json').then(response => {\n    if (response.headers.get('content-type') !== 'application/json') {\n      throw new TypeError();\n    }\n    \n    return response.XXX();\n  });\n}",
+    "question": "Que va afficher ce code dans la console ?",
+    "code": "const rows = [\n  {\n    user: 'Tom',\n    level: 5,\n  },\n  {\n    user: 'Jenny',\n    level: 4,\n  },\n  {\n    user: 'Bryan',\n    level: 2,\n  },\n  {\n    user: undefined,\n    level: 11,\n  },\n  {\n    user: 'Margaret',\n    level: 13,\n  },\n];\n\nconsole.log(rows.map(({ user }) => user).filter(value => value).length);\n\n",
     "choices": [
-      "json",
-      "text",
-      "data"
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
     ]
   },
   {
     "id": 17,
-    "question": "Que va afficher ce code, et au bout de combien de temps ?",
-    "code": "new Promise(resolve => {\n  setTimeout(() => resolve('A'), 1000);\n}).then(res => new Promise(resolve => {\n  setTimeout(() => resolve(res + 'B'), 2000);\n})).then(res => new Promise(resolve => {\n  setTimeout(() => resolve(res + 'C'), 3000);\n})).then(res => {\n  alert(res);\n});",
+    "question": "Que va afficher ce code dans la console ?",
+    "code": "const profile = { userName: 'Chris' };\nconst profile2 = { ...profile };\nconst { username: userName } = profile2;\nconsole.log(userName);",
     "choices": [
-      "undefined au bout de 1 seconde",
-      "ABC au bout de 6 secondes",
-      "A au bout de 6 secondes"
+      "// Chris",
+      "// username",
+      "// undefined"
     ]
   },
   {
     "id": 18,
-    "question": "A quoi sert le second paramètre de Promise.then ?",
+    "question": "A quoi sert le premier paramètre de Promise.then ?",
     "choices": [
-      "C'est un callback exécuté dans tous les cas lorsque la promesse est résolue",
-      "C'est un callback exécuté lorsque la promesse est en échec",
-      "C'est un argument obsolète"
+      "// C'est un callback exécuté dans tous les cas lorsque la promesse est résolue",
+      "// C'est un callback exécuté lorsque la promesse est en échec",
+      "// C'est la valeur par défaut"
     ]
   },
   {
     "id": 19,
-    "question": "Promise.all est utile pour rassembler plusieurs promesses en une seule.\nCette promesse sera...",
+    "question": "L'Ecma est une organisation ***** fondée en *****",
     "choices": [
-      "...résolue lorsque toutes les promesses fournies seront résolues ou qui échouera lorsque l'une d'entre-elles échouera",
-      "...résolue lorsque toutes les promesses fournies seront résolues ou qui échouera lorsqu'elles auront toutes échoué",
-      "...résolue lorsqu'au moins une promesse sera résolue ou échouée"
+      "// européenne - 1961",
+      "// américaine - 1972",
+      "// chinoise - 1983",
+      "// russe - 2001"
     ]
   },
   {
     "id": 20,
-    "question": "Qu'avez-vous pensé du cours jusqu'ici ?",
+    "question": "Qu'affiche ce code ?",
+    "code": "String.prototype.ucSplit = function() { return this.replace(/(?<=.)([A-Z])/g, ' $1'); };\nconsole.log(\"TheQuickBrownFoxJumpsOverTheLazyDog.\".ucSplit());",
     "choices": [
-      "Tout pourri :(",
-      "Bof bof :/",
-      "Excellent j'en veux encore :D"
+      "// ƒ () { return this.replace(/(?<=.)([A-Z])/g, ' $1'); }",
+      "// TheQuickBrownFoxJumpsOverTheLazyDog.",
+      "// The Quick Brown Fox Jumps Over The Lazy Dog."
     ]
   }
 ]

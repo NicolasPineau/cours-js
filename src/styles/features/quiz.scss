@@ -37,9 +37,12 @@
             margin-left: 30px;
         }
 
-        .submit-answer:disabled {
-            opacity: 0.3;
+        .submit-answer {
             margin-left: 31px;
+
+            &:disabled {
+                opacity: 0.3;
+            }
         }
     }
 }
