@@ -3,5 +3,7 @@ export const api = (action, queryArgs = {}, options = {}) => {
     acc.concat(`${k}=${v}`)
   ), []).join('&');
 
-  return fetch(`http://www.cours-js.test/api/${action}.php?${args}`, options);
+
+
+  return fetch(`/api/${action}.php?${args}`, options);
 };
