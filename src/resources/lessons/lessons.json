@@ -56,7 +56,8 @@
   "exercices3": {
     "title": "Exercices d'entraînement 3",
     "pages": {
-      "exercices1": "Déstructuration et décomposition"
+      "exercices1": "Déstructuration et décomposition",
+      "exercices2": "Mix"
     }
   }
 }
